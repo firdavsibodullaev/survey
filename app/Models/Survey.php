@@ -14,6 +14,10 @@ class Survey extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'survey'
+    ];
+
     /**
      * @return HasMany
      */

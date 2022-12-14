@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('question_id')->constrained();
             $table->foreignId('answer_id')->constrained();
-            $table->foreignId('respondent_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
