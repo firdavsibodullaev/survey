@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Answer;
+use App\Models\Question;
+use App\Models\Respondent;
+use App\Models\Survey;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +18,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Respondent::factory(3)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Survey::factory(2)->has(
+            Question::factory(5)->has(
+                Answer::factory(3),
+                'answers'
+            ),
+            'questions')
+            ->create();
+
+        $this->call([
+            QuestionOrderSeeder::class
+        ]);
+
     }
 }
