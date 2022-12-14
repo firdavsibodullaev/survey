@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Survey;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::factory(1)->create();
+
         Survey::factory(2)->has(
             Question::factory(5)->has(
                 Answer::factory(3),
