@@ -19,22 +19,6 @@ class QuestionService
     }
 
     /**
-     * @param array $payload
-     * @return string[]
-     */
-    public function answer(array $payload): array
-    {
-        $question = $this->findById($payload['question_id']);
-
-        $question->response()->create([
-            "answer_id" => $payload["answer_id"],
-            "user_id" => auth()->id()
-        ]);
-
-        return ["message" => "Answered successfully"];
-    }
-
-    /**
      * @param int $question_id
      * @param int|null $next_question_id
      * @return null|Question

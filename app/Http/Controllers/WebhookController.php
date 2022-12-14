@@ -7,11 +7,12 @@ use App\Enums\SurveyMessage;
 use App\Http\Requests\InputRequest;
 use App\Http\Resources\QuestionResource;
 use App\Services\QuestionService;
+use App\Services\SurveyService;
 use Illuminate\Http\JsonResponse;
 
 class WebhookController extends Controller
 {
-    public function __construct(private readonly QuestionService $questionService)
+    public function __construct(private readonly SurveyService $surveyService)
     {
     }
 
@@ -21,9 +22,9 @@ class WebhookController extends Controller
      */
     public function input(InputRequest $request): JsonResponse|QuestionResource
     {
-        $this->questionService->answer($request->validated());
+        $this->surveyService->answer($request->validated());
 
-        $next_question = $this->questionService
+        $next_question = app(QuestionService::class)
             ->getNextQuestion(
                 $request->get('question_id'),
                 $request->get('next_question_id')
